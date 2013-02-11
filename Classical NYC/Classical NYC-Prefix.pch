@@ -1,0 +1,29 @@
+//
+// Prefix header for all source files of the 'Classical NYC' target in the 'Classical NYC' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
+
+
+#ifdef DEBUG
+
+#	define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
+#	define DMem( s, ... ) NSLog( @"<%s : (%d) [Memory: %d]> %@",__FUNCTION__, __LINE__,[Global getFreeMemory], [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+
+#else
+
+#	define DLog(...)
+#	define DMem(...)
+
+#endif
+
+#define VENUELIST [[CNVenueList sharedInstance] venueList]
