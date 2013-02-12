@@ -11,7 +11,9 @@
 #import "CNVenue.h"
 
 @interface CNTableViewController ()
-
+{
+    BOOL _emptyFlag;
+}
 @end
 
 @implementation CNTableViewController
@@ -51,7 +53,17 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return VENUELIST.count;
+    if (VENUELIST.count == 0)
+    {
+        _emptyFlag = YES;
+        return 1;
+    }
+    
+    else
+    {
+        _emptyFlag = NO;
+        return VENUELIST.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,10 +74,28 @@
 		cell = [[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: CellIdentifier] autorelease];
 	}
     
-    CNVenue *tmpVenue = [VENUELIST objectAtIndex: indexPath.row];
-    cell.textLabel.text = tmpVenue.venueName;
+    if (_emptyFlag)
+    {
+        cell.textLabel.text = @"Tap to refresh";
+        UIButton *tmpButton = [UIButton buttonWithType: UIButtonTypeCustom];
+        [tmpButton setBackgroundColor: [UIColor clearColor]];
+        [tmpButton setFrame: CGRectMake (0, 0, 320, 30)];
+        [cell addSubview: tmpButton];
+        [tmpButton addTarget: self action: @selector(refreshData:) forControlEvents: UIControlEventAllTouchEvents];
+    }
     
+    else
+    {
+        CNVenue *tmpVenue = [VENUELIST objectAtIndex: indexPath.row];
+        cell.textLabel.text = tmpVenue.venueName;
+    }
     return cell;
+}
+
+- (void) refreshData: (UIButton *) inSender
+{
+    [inSender removeFromSuperview];
+    [self.tableView reloadData];
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -116,6 +146,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     CNVenue *tmpVenue = [VENUELIST objectAtIndex: indexPath.row];
    
     UIWebView *tmpWebView = [[UIWebView alloc] initWithFrame: CGRectMake(0, 0, 320, 480)];
