@@ -23,7 +23,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     
-    [GMSServices provideAPIKey:@"AIzaSyA19yiic0qvVF-kUSXXpcAaVJobGU1OjPE"];
+    [GMSServices provideAPIKey:@""];
     [self.window setRootViewController:[[[CNTabBarController alloc] init] autorelease]];
     [self.window makeKeyAndVisible];
     return YES;
