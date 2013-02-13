@@ -12,7 +12,9 @@
 #import "CNAnnotation.h"
 
 @interface CNNearbyController ()
-
+{
+    UIButton *_previousSender;
+}
 @end
 
 @implementation CNNearbyController
@@ -45,6 +47,7 @@
     
     //change to picker view in a later iteration. For now, buttons
     int tmpArray[] = {1, 5, 10};
+
     for (int i = 0; i < 3; ++i)
     {
         UIButton *tmpButton = [UIButton buttonWithType: UIButtonTypeCustom];
@@ -66,7 +69,14 @@
         [self.annotationArray removeAllObjects];
     }
     
+    //reset button previous button if it's not currently pressed
+    if (sender != _previousSender)
+    {
+        [_previousSender.titleLabel setTextColor: [UIColor blackColor]];
+    }
+    
     //determine the proximity range from the first two characters of the sender
+#warning This works, but 10 gives it obvious fits
     int tmpProximityRange = (int)[sender.currentTitle characterAtIndex: 0] + (int)[sender.currentTitle characterAtIndex: 1];
     DLog(@"Proximity range: %i", tmpProximityRange);
     CLLocation *tmpUserLocation = [[CLLocation alloc] initWithLatitude: self.mapView.userLocation.coordinate.latitude longitude: self.mapView.userLocation.coordinate.longitude];
@@ -90,6 +100,7 @@
         }
     }
     [self.mapView addAnnotations: self.annotationArray];
+    _previousSender = sender;
 }
 
 #pragma mark MKMapView delegate methods
