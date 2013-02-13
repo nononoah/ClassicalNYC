@@ -7,7 +7,7 @@
 //
 
 #import "CNTableViewController.h"
-#import "CNVenueList.h"
+#import "CNVenueHandler.h"
 #import "CNVenue.h"
 
 @interface CNTableViewController ()
@@ -18,10 +18,11 @@
 
 @implementation CNTableViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)init
 {
-    self = [super initWithStyle:style];
+    self = [super initWithStyle: UITableViewStylePlain];
     if (self) {
+        self.title = @"List";
     }
     return self;
 }
@@ -87,7 +88,11 @@
     else
     {
         CNVenue *tmpVenue = [VENUELIST objectAtIndex: indexPath.row];
-        cell.textLabel.text = tmpVenue.venueName;
+        //UIFont *tmpFont = [UIFont fontWithName: @"Helvetica" size: 12.0];
+        
+        [cell.textLabel setText: tmpVenue.venueName];
+        //[cell.textLabel setFont: tmpFont];
+       
     }
     return cell;
 }

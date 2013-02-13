@@ -12,4 +12,6 @@
 
 @interface CNMapViewController : UIViewController <MKMapViewDelegate>
 
+@property (nonatomic, assign) MKMapView *mapView;
+
 @end

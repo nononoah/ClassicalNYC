@@ -6,31 +6,32 @@
 //  Copyright (c) 2013 Noah Blake. All rights reserved.
 //
 
-#import "CNJSONParser.h"
+#import "CNJSONHandler.h"
 #import "AFJSONRequestOperation.h"
 #import "AFHTTPClient.h"
 #import "CNVenue.h"
 
-@implementation CNJSONParser
+@implementation CNJSONHandler
 
 
 + (void) fetchArrayFromJSON: (void (^)(NSArray *inArray)) inSuccessBlock
 {
-    NSURL *url = [NSURL URLWithString:@"https://nycopendata.socrata.com/api/views/txxa-5nhg/rows.json"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURL *tmpUrl = [NSURL URLWithString:@"https://nycopendata.socrata.com/api/views/txxa-5nhg/rows.json"];
+    NSURLRequest *tmpRequest = [NSURLRequest requestWithURL:tmpUrl];
     
-    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+    AFJSONRequestOperation *tmpOperation = [AFJSONRequestOperation JSONRequestOperationWithRequest:tmpRequest success:^(NSURLRequest *tmpRequest, NSHTTPURLResponse *response, id JSON) {
         NSArray *unparsedArray = [NSArray arrayWithArray: [JSON valueForKey:@"data"]];
         inSuccessBlock(unparsedArray);
     } failure:nil];
     
-    [operation start];
+    NSOperationQueue *tmpQueue = [[NSOperationQueue alloc] init];
+    [tmpQueue addOperation: tmpOperation];
 }
 
 + (void) parseArrayFromJSON: (void (^)(NSArray *inArray)) inSuccessBlock
 {
     NSMutableArray *tmpMutableArray = [NSMutableArray array];
-    [CNJSONParser fetchArrayFromJSON: ^(NSArray *inArray) {
+    [CNJSONHandler fetchArrayFromJSON: ^(NSArray *inArray) {
        // DLog(@"Grabbed array, looks like: %@", inArray);
         
         //parse JSON by making objects and adding those objects to an array

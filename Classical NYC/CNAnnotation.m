@@ -14,9 +14,9 @@
 {
     self = [super init];
     if (self) {
-        _coordinate = inCoordinate;
-        _title = inTitle;
-        _subtitle = inSubtitle;
+        self.coordinate = inCoordinate;
+        self.title = inTitle;
+        self.subtitle = inSubtitle;
     
     }
     return self;
@@ -35,7 +35,6 @@
 
 - (void) dealloc
 {
-    [_title release];
     [super dealloc];
 }
 @end

@@ -9,7 +9,8 @@
 #import "CNTabBarController.h"
 #import "CNTableViewController.h"
 #import "CNMapViewController.h"
-#import "CNGoogleMapViewController.h"
+//#import "CNGoogleMapViewController.h"
+#import "CNNearbyController.h"
 
 
 @interface CNTabBarController ()
@@ -23,10 +24,10 @@
     self = [super init];
     if (self) {
         NSMutableArray *tmpMutableArray = [[NSMutableArray alloc] init];
-        NSArray *tmpArray = [NSArray arrayWithObjects: @"List", @"Map", /*@"Google Map",*/ @"What's Close?",  nil];
+        NSArray *tmpArray = [NSArray arrayWithObjects: @"List", @"Map", /*@"Google Map",*/ @"Nearby",  nil];
         int i = 0;
         
-		for (Class tmpClass in @[[CNTableViewController class], [CNMapViewController class], /*[CNGoogleMapViewController class],*/ [UIViewController class]])
+		for (Class tmpClass in @[[CNTableViewController class], [CNMapViewController class], /*[CNGoogleMapViewController class],*/ [CNNearbyController class]])
 		{
 			UINavigationController *tmpNavController = [[UINavigationController alloc] initWithRootViewController:[[[tmpClass alloc] init] autorelease]];
             tmpNavController.title = [tmpArray objectAtIndex: i];

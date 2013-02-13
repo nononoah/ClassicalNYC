@@ -6,14 +6,14 @@
 //  Copyright (c) 2013 Noah Blake. All rights reserved.
 //
 
-#import "CNVenueList.h"
-#import "CNJSONParser.h"
+#import "CNVenueHandler.h"
+#import "CNJSONHandler.h"
 
-@implementation CNVenueList
+@implementation CNVenueHandler
 
 + (id)sharedInstance {
 	static dispatch_once_t predicate;
-	static CNVenueList *instance = nil;
+	static CNVenueHandler *instance = nil;
 	dispatch_once(&predicate, ^{instance = [[self alloc] init];});
 	return instance;
 }
@@ -22,7 +22,7 @@
 {
     if ((self = [super init]))
     {
-        [CNJSONParser parseArrayFromJSON: ^(NSArray *inArray)
+        [CNJSONHandler parseArrayFromJSON: ^(NSArray *inArray)
          {
              self.venueList = [NSArray arrayWithArray: inArray];
              DLog(@"Made venue list, count is %i", _venueList.count);

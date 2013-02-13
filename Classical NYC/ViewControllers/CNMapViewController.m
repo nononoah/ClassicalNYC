@@ -7,11 +7,13 @@
 //
 
 #import "CNMapViewController.h"
-#import "CNVenueList.h"
+#import "CNVenueHandler.h"
 #import "CNVenue.h"
 #import "CNAnnotation.h"
 
 @implementation CNMapViewController
+
+static int _pinCount = 0;
 
 - (id)init
 {
@@ -24,35 +26,44 @@
 
 - (void) viewDidLoad
 {
-    MKMapView *tmpMapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
+    self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
 
     // {} shortcut for defining structs
     CLLocationCoordinate2D tmpCenter = {40.7142, -74.006}; //latitude, longitude
     MKCoordinateSpan tmpSpan = {.2, .2}; //degrees of lat and long span includes
     MKCoordinateRegion tmpRegion = {tmpCenter, tmpSpan}; //region sets default location and zoom for map when it opens
-    tmpMapView.region = tmpRegion;
-    tmpMapView.showsUserLocation = YES;
-    tmpMapView.delegate = self;
+    self.mapView.region = tmpRegion;
+    self.mapView.showsUserLocation = YES;
+    self.mapView.delegate = self;
     
+    [self annotateMapView];
+   
+    [self.view addSubview: self.mapView];
+}
 
+- (void) viewDidAppear:(BOOL)animated
+{
+    if (_pinCount == 0)
+    {
+        DLog(@"Required refresh");
+        [self annotateMapView];
+    }
+}
+
+
+- (void) annotateMapView
+{
     for (CNVenue *tmpVenue in VENUELIST)
     {
         CLLocationCoordinate2D tmpVenueCoordinate = {tmpVenue.latitude.doubleValue, tmpVenue.longitude.doubleValue};
         CNAnnotation *tmpPin = [[CNAnnotation alloc] initWithCoordinate: tmpVenueCoordinate
-                                                                     andTitle: tmpVenue.venueName
-                                                                  andSubtitle: tmpVenue.venueStreetAddress];
-        
-        //MKAnnotationView *tmpAnnotationView = [[MKAnnotationView alloc] initWithAnnotation: tmpPin reuseIdentifier: @"PIN"];
-        //[self.view addSubview: tmpAnnotationView];
-        [tmpMapView addAnnotation: tmpPin];
+                                                               andTitle: tmpVenue.venueName
+                                                            andSubtitle: tmpVenue.venueStreetAddress];
+        [self.mapView addAnnotation: tmpPin];
+        _pinCount++;
         [tmpPin release];
     }
-    
-    //overlay
-   
-    [self.view addSubview: tmpMapView];
 }
-
 #pragma mark MKMapView delegate methods
 
 //gain access to customization of MKAnnotationView through this method

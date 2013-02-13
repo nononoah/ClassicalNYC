@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CNVenueList : NSObject
+@interface CNVenueHandler : NSObject
 
 @property (nonatomic, retain) NSArray *venueList;
 + (id)sharedInstance;

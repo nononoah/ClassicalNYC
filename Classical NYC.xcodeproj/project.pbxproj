@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D0E2D9816CC0E0B000CCF58 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */; };
 		1D0F603116C97BC400FE9841 /* CNAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F603016C97BC400FE9841 /* CNAnnotation.m */; };
 		1DD685B516CA948000E45852 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B416CA948000E45852 /* AVFoundation.framework */; };
 		1DD685B716CA948A00E45852 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B616CA948A00E45852 /* CoreData.framework */; };
@@ -47,12 +48,13 @@
 		1DE1249416C941D100463022 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1248916C941D100463022 /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1DE1249516C941D100463022 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1248B16C941D100463022 /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		1DE1249616C941D100463022 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1248D16C941D100463022 /* UIImageView+AFNetworking.m */; };
-		1DE1249916C9420900463022 /* CNJSONParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1249816C9420900463022 /* CNJSONParser.m */; };
+		1DE1249916C9420900463022 /* CNJSONHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1249816C9420900463022 /* CNJSONHandler.m */; };
 		1DE1249C16C9446700463022 /* CNVenue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1249B16C9446700463022 /* CNVenue.m */; };
-		1DE1249F16C94ECE00463022 /* CNVenueList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1249E16C94ECE00463022 /* CNVenueList.m */; };
+		1DE1249F16C94ECE00463022 /* CNVenueHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1249E16C94ECE00463022 /* CNVenueHandler.m */; };
 		1DE124A116C95DDD00463022 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE124A016C95DDD00463022 /* MapKit.framework */; };
 		1DE124A416C95E1700463022 /* CNMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE124A316C95E1700463022 /* CNMapViewController.m */; };
 		1DE124A616C961A200463022 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE124A516C961A200463022 /* CoreLocation.framework */; };
+		1DF01BF616CBE75D007FFADB /* CNNearbyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DF01BF516CBE75D007FFADB /* CNNearbyController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D0F602F16C97BC400FE9841 /* CNAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAnnotation.h; sourceTree = "<group>"; };
 		1D0F603016C97BC400FE9841 /* CNAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAnnotation.m; sourceTree = "<group>"; };
 		1DD685B416CA948000E45852 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -125,16 +128,18 @@
 		1DE1248B16C941D100463022 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		1DE1248C16C941D100463022 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		1DE1248D16C941D100463022 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		1DE1249716C9420900463022 /* CNJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNJSONParser.h; path = Models/CNJSONParser.h; sourceTree = "<group>"; };
-		1DE1249816C9420900463022 /* CNJSONParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNJSONParser.m; path = Models/CNJSONParser.m; sourceTree = "<group>"; };
+		1DE1249716C9420900463022 /* CNJSONHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNJSONHandler.h; path = Models/CNJSONHandler.h; sourceTree = "<group>"; };
+		1DE1249816C9420900463022 /* CNJSONHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNJSONHandler.m; path = Models/CNJSONHandler.m; sourceTree = "<group>"; };
 		1DE1249A16C9446700463022 /* CNVenue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNVenue.h; path = Models/CNVenue.h; sourceTree = "<group>"; };
 		1DE1249B16C9446700463022 /* CNVenue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNVenue.m; path = Models/CNVenue.m; sourceTree = "<group>"; };
-		1DE1249D16C94ECE00463022 /* CNVenueList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNVenueList.h; path = Models/CNVenueList.h; sourceTree = "<group>"; };
-		1DE1249E16C94ECE00463022 /* CNVenueList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNVenueList.m; path = Models/CNVenueList.m; sourceTree = "<group>"; };
+		1DE1249D16C94ECE00463022 /* CNVenueHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNVenueHandler.h; path = Models/CNVenueHandler.h; sourceTree = "<group>"; };
+		1DE1249E16C94ECE00463022 /* CNVenueHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNVenueHandler.m; path = Models/CNVenueHandler.m; sourceTree = "<group>"; };
 		1DE124A016C95DDD00463022 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		1DE124A216C95E1700463022 /* CNMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNMapViewController.h; path = ViewControllers/CNMapViewController.h; sourceTree = "<group>"; };
 		1DE124A316C95E1700463022 /* CNMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNMapViewController.m; path = ViewControllers/CNMapViewController.m; sourceTree = "<group>"; };
 		1DE124A516C961A200463022 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1DF01BF416CBE75D007FFADB /* CNNearbyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNNearbyController.h; sourceTree = "<group>"; };
+		1DF01BF516CBE75D007FFADB /* CNNearbyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNNearbyController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1D0E2D9816CC0E0B000CCF58 /* MobileCoreServices.framework in Frameworks */,
 				1DD685C916CA94E200E45852 /* SystemConfiguration.framework in Frameworks */,
 				1DD685C716CA94DA00E45852 /* QuartzCore.framework in Frameworks */,
 				1DD685C516CA94D300E45852 /* OpenGLES.framework in Frameworks */,
@@ -243,6 +249,7 @@
 				1DE124A516C961A200463022 /* CoreLocation.framework */,
 				1DE124A016C95DDD00463022 /* MapKit.framework */,
 				1DE1243816C93FCA00463022 /* UIKit.framework */,
+				1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */,
 				1DE1243A16C93FCA00463022 /* Foundation.framework */,
 				1DE1243C16C93FCA00463022 /* CoreGraphics.framework */,
 				1DE1245616C93FCA00463022 /* SenTestingKit.framework */,
@@ -319,6 +326,8 @@
 				1DE1247716C9414400463022 /* CNTableViewController.m */,
 				1DE124A216C95E1700463022 /* CNMapViewController.h */,
 				1DE124A316C95E1700463022 /* CNMapViewController.m */,
+				1DF01BF416CBE75D007FFADB /* CNNearbyController.h */,
+				1DF01BF516CBE75D007FFADB /* CNNearbyController.m */,
 				1DD685CB16CA95EA00E45852 /* CNGoogleMapViewController.h */,
 				1DD685CC16CA95EA00E45852 /* CNGoogleMapViewController.m */,
 			);
@@ -328,10 +337,10 @@
 		1DE1247916C941A500463022 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				1DE1249716C9420900463022 /* CNJSONParser.h */,
-				1DE1249816C9420900463022 /* CNJSONParser.m */,
-				1DE1249D16C94ECE00463022 /* CNVenueList.h */,
-				1DE1249E16C94ECE00463022 /* CNVenueList.m */,
+				1DE1249716C9420900463022 /* CNJSONHandler.h */,
+				1DE1249816C9420900463022 /* CNJSONHandler.m */,
+				1DE1249D16C94ECE00463022 /* CNVenueHandler.h */,
+				1DE1249E16C94ECE00463022 /* CNVenueHandler.m */,
 				1DE1249A16C9446700463022 /* CNVenue.h */,
 				1DE1249B16C9446700463022 /* CNVenue.m */,
 			);
@@ -489,12 +498,13 @@
 				1DE1249416C941D100463022 /* AFURLConnectionOperation.m in Sources */,
 				1DE1249516C941D100463022 /* AFXMLRequestOperation.m in Sources */,
 				1DE1249616C941D100463022 /* UIImageView+AFNetworking.m in Sources */,
-				1DE1249916C9420900463022 /* CNJSONParser.m in Sources */,
+				1DE1249916C9420900463022 /* CNJSONHandler.m in Sources */,
 				1DE1249C16C9446700463022 /* CNVenue.m in Sources */,
-				1DE1249F16C94ECE00463022 /* CNVenueList.m in Sources */,
+				1DE1249F16C94ECE00463022 /* CNVenueHandler.m in Sources */,
 				1DE124A416C95E1700463022 /* CNMapViewController.m in Sources */,
 				1D0F603116C97BC400FE9841 /* CNAnnotation.m in Sources */,
 				1DD685CD16CA95EA00E45852 /* CNGoogleMapViewController.m in Sources */,
+				1DF01BF616CBE75D007FFADB /* CNNearbyController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

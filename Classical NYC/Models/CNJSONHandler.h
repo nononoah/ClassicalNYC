@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CNJSONParser : NSObject
+@interface CNJSONHandler : NSObject
 
 + (void) fetchArrayFromJSON: (void (^)(NSArray *inArray)) inSuccessBlock;
 + (void) parseArrayFromJSON: (void (^)(NSArray *inArray)) inSuccessBlock;

@@ -12,8 +12,8 @@
 
 @property (nonatomic, retain) NSNumber *latitude;
 @property (nonatomic, retain) NSNumber *longitude;
-@property (nonatomic, retain) NSString *venueName;
-@property (nonatomic, retain) NSString *venueURL;
-@property (nonatomic, retain) NSString *venueStreetAddress;
+@property (nonatomic, copy)   NSString *venueName;
+@property (nonatomic, copy)   NSString *venueURL;
+@property (nonatomic, copy)   NSString *venueStreetAddress;
 
 @end
