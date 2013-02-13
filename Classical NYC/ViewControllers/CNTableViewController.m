@@ -9,6 +9,8 @@
 #import "CNTableViewController.h"
 #import "CNVenueHandler.h"
 #import "CNVenue.h"
+#import "CNMapViewController.h"
+#import "CNButton.h"
 
 @interface CNTableViewController ()
 {
@@ -17,6 +19,7 @@
 @end
 
 @implementation CNTableViewController
+
 
 - (id)init
 {
@@ -89,12 +92,40 @@
     {
         CNVenue *tmpVenue = [VENUELIST objectAtIndex: indexPath.row];
         //UIFont *tmpFont = [UIFont fontWithName: @"Helvetica" size: 12.0];
-        
-        [cell.textLabel setText: tmpVenue.venueName];
         //[cell.textLabel setFont: tmpFont];
+        [cell.textLabel setText: tmpVenue.venueName];
        
+        //add accessory view button to see on map
+        CNButton *tmpMapVenueButton = [CNButton buttonWithType: UIButtonTypeCustom];
+        tmpMapVenueButton.foundInRow = indexPath.row;
+        [tmpMapVenueButton setTitle: @"MAP" forState: UIControlStateNormal];
+        tmpMapVenueButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+        [tmpMapVenueButton setBackgroundColor: [UIColor greenColor]];
+        [tmpMapVenueButton setFrame: CGRectMake(0, 0, 30, 30)];
+        [tmpMapVenueButton addTarget: self action: @selector(showVenueOnMap:) forControlEvents: UIControlEventTouchUpInside];
+        [cell setAccessoryView: tmpMapVenueButton];
     }
     return cell;
+}
+
+- (void) showVenueOnMap: (CNButton *) inSender
+{
+    //set up controller and its mapview
+    CNMapViewController *tmpController = [[CNMapViewController alloc] init];
+    CLLocationCoordinate2D tmpCenter = {40.7142, -74.006}; //latitude, longitude
+    MKCoordinateSpan tmpSpan = {.2, .2}; //degrees of lat and long span includes
+    MKCoordinateRegion tmpRegion = {tmpCenter, tmpSpan}; //region sets default location and zoom for map when it opens
+    tmpController.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
+    tmpController.mapView.region = tmpRegion;
+    tmpController.mapView.showsUserLocation = YES;
+    tmpController.mapView.delegate = tmpController;
+    
+    
+    [self.navigationController pushViewController: tmpController animated: YES];
+    //clear loading annotation, add annotation to this mapview
+    [tmpController clearMapViewAndAnnotateUsing: [VENUELIST objectAtIndex: inSender.foundInRow]];
+    
+    [tmpController release];
 }
 
 - (void) refreshData: (UIButton *) inSender

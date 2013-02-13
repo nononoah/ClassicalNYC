@@ -13,5 +13,8 @@
 @interface CNMapViewController : UIViewController <MKMapViewDelegate>
 
 @property (nonatomic, assign) MKMapView *mapView;
+@property (nonatomic, assign) NSMutableArray *annotationArray;
+
+- (void) clearMapViewAndAnnotateUsing: (NSArray *) inArray;
 
 @end

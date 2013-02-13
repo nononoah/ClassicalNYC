@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D0E2D9816CC0E0B000CCF58 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */; };
 		1D0F603116C97BC400FE9841 /* CNAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F603016C97BC400FE9841 /* CNAnnotation.m */; };
+		1D30FF4C16CC2133009C5874 /* CNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D30FF4B16CC2133009C5874 /* CNButton.m */; };
 		1DD685B516CA948000E45852 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B416CA948000E45852 /* AVFoundation.framework */; };
 		1DD685B716CA948A00E45852 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B616CA948A00E45852 /* CoreData.framework */; };
 		1DD685B916CA949300E45852 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B816CA949300E45852 /* CoreText.framework */; };
@@ -71,6 +72,8 @@
 		1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		1D0F602F16C97BC400FE9841 /* CNAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNAnnotation.h; sourceTree = "<group>"; };
 		1D0F603016C97BC400FE9841 /* CNAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAnnotation.m; sourceTree = "<group>"; };
+		1D30FF4A16CC2133009C5874 /* CNButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNButton.h; path = Extensions/CNButton.h; sourceTree = "<group>"; };
+		1D30FF4B16CC2133009C5874 /* CNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNButton.m; path = Extensions/CNButton.m; sourceTree = "<group>"; };
 		1DD685B416CA948000E45852 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1DD685B616CA948A00E45852 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1DD685B816CA949300E45852 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -215,6 +218,8 @@
 			children = (
 				1D0F602F16C97BC400FE9841 /* CNAnnotation.h */,
 				1D0F603016C97BC400FE9841 /* CNAnnotation.m */,
+				1D30FF4A16CC2133009C5874 /* CNButton.h */,
+				1D30FF4B16CC2133009C5874 /* CNButton.m */,
 			);
 			name = Extensions;
 			path = "Classical NYC";
@@ -505,6 +510,7 @@
 				1D0F603116C97BC400FE9841 /* CNAnnotation.m in Sources */,
 				1DD685CD16CA95EA00E45852 /* CNGoogleMapViewController.m in Sources */,
 				1DF01BF616CBE75D007FFADB /* CNNearbyController.m in Sources */,
+				1D30FF4C16CC2133009C5874 /* CNButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

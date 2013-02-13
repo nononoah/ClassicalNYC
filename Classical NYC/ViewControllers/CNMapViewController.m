@@ -20,6 +20,7 @@ static int _pinCount = 0;
     self = [super init];
     if (self) {
         self.title = @"Map";
+        self.annotationArray = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -50,7 +51,6 @@ static int _pinCount = 0;
     }
 }
 
-
 - (void) annotateMapView
 {
     for (CNVenue *tmpVenue in VENUELIST)
@@ -59,11 +59,32 @@ static int _pinCount = 0;
         CNAnnotation *tmpPin = [[CNAnnotation alloc] initWithCoordinate: tmpVenueCoordinate
                                                                andTitle: tmpVenue.venueName
                                                             andSubtitle: tmpVenue.venueStreetAddress];
-        [self.mapView addAnnotation: tmpPin];
+        [self.annotationArray addObject: tmpPin];
         _pinCount++;
         [tmpPin release];
     }
+    [self.mapView addAnnotations: self.annotationArray];
 }
+
+- (void) clearMapViewAndAnnotateUsing: (CNVenue *) inVenue
+{
+    //clear annotations and clear array
+    if (self.annotationArray.count != 0)
+    {
+        [self.mapView removeAnnotations: self.annotationArray];
+        [self.annotationArray removeAllObjects];
+    }
+    
+    CLLocationCoordinate2D tmpVenueCoordinate = {inVenue.latitude.doubleValue, inVenue.longitude.doubleValue};
+    CNAnnotation *tmpPin = [[CNAnnotation alloc] initWithCoordinate: tmpVenueCoordinate
+                                                                   andTitle: inVenue.venueName
+                                                                andSubtitle: inVenue.venueStreetAddress];
+    [self.annotationArray addObject: tmpPin];
+    [tmpPin release];
+    
+    [self.mapView addAnnotations: self.annotationArray];
+}
+
 #pragma mark MKMapView delegate methods
 
 //gain access to customization of MKAnnotationView through this method
