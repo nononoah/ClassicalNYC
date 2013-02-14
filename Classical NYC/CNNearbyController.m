@@ -10,10 +10,12 @@
 #import "CNVenueHandler.h"
 #import "CNVenue.h"
 #import "CNAnnotation.h"
+#import "CNButton.h"
 
 @interface CNNearbyController ()
 {
     UIButton *_previousSender;
+    CNButton *_getDirectionsButton;
 }
 @end
 
@@ -25,6 +27,7 @@
     if (self) {
         self.title = @"Nearby";
         self.annotationArray = [[NSMutableArray alloc] init];
+        
     }
     return self;
 }
@@ -33,6 +36,7 @@
 - (void) viewDidLoad
 {
     self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
+   
     
     // {} shortcut for defining structs
     CLLocationCoordinate2D tmpCenter = {40.7142, -74.006}; //latitude, longitude
@@ -69,16 +73,22 @@
         [self.annotationArray removeAllObjects];
     }
     
-    //reset button previous button if it's not currently pressed
+    //reset previous button if it's not currently pressed
     if (sender != _previousSender)
     {
         [_previousSender.titleLabel setTextColor: [UIColor blackColor]];
     }
     
+    //remove directions button if present
+    if (_getDirectionsButton.superview)
+    {
+        [_getDirectionsButton removeFromSuperview];
+    }
+    
     //determine the proximity range from the first two characters of the sender
 #warning This works, but 10 gives it obvious fits
     int tmpProximityRange = (int)[sender.currentTitle characterAtIndex: 0] + (int)[sender.currentTitle characterAtIndex: 1];
-    DLog(@"Proximity range: %i", tmpProximityRange);
+    //DLog(@"Proximity range: %i", tmpProximityRange);
     CLLocation *tmpUserLocation = [[CLLocation alloc] initWithLatitude: self.mapView.userLocation.coordinate.latitude longitude: self.mapView.userLocation.coordinate.longitude];
     
     //test each venue for its proximity to current location
@@ -103,6 +113,41 @@
     _previousSender = sender;
 }
 
+#pragma mark Launch a map
+- (void) passDirections: (CNButton *) inSender
+{
+    CLLocation *tmpPinLocation = [[CLLocation alloc] initWithLatitude: inSender.passingLatitude longitude: inSender.passingLongitude];
+    [self openMapsWithDirectionsTo: tmpPinLocation.coordinate];
+}
+
+- (void) openMapsWithDirectionsTo: (CLLocationCoordinate2D) inLocation
+{
+    //MKMapItems are used to encapsulate map data which is used to launch the apple maps app (Map routing has to be turned on in plist)
+    
+    //check to see if ios 6 is running, previous versions do not support MKMapItem
+    Class tmpClass = [MKMapItem class];
+    if (tmpClass && [tmpClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
+    {
+        MKMapItem *tmpCurrentLocation = [MKMapItem mapItemForCurrentLocation];
+        MKMapItem *tmpToLocation = [[MKMapItem alloc] initWithPlacemark:[[[MKPlacemark alloc] initWithCoordinate: inLocation addressDictionary:nil] autorelease]];
+        tmpToLocation.name = @"Destination";
+        [MKMapItem openMapsWithItems:[NSArray arrayWithObjects: tmpCurrentLocation, tmpToLocation, nil]
+                       launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeDriving, [NSNumber numberWithBool:YES], nil]
+                                                                 forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
+    }
+    
+    //if the user isn't using ios6, just make a url request to google maps
+    else
+    {
+        NSMutableString *mapURL = [NSMutableString stringWithString:@"http://maps.google.com/maps?"];
+        [mapURL appendFormat:@"saddr=%f, %f", self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude];
+        [mapURL appendFormat:@"&daddr=%f,%f", inLocation.latitude, inLocation.longitude];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[mapURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    }
+
+}
+
+
 #pragma mark MKMapView delegate methods
 //gain access to customization of MKAnnotationView through this method
 -(MKAnnotationView *)mapView:(MKMapView *) inMapView viewForAnnotation: (id <MKAnnotation>) inAnnotation
@@ -126,11 +171,19 @@
 //delegate learns a view has been selected
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
-    CLLocation *userLocation = [[CLLocation alloc] initWithLatitude: mapView.userLocation.coordinate.latitude longitude: mapView.userLocation.coordinate.longitude];
-    CLLocation *pinLocation = [[CLLocation alloc] initWithLatitude: view.annotation.coordinate.latitude longitude: view.annotation.coordinate.longitude];
-    DLog(@"Distance between pin and current location: %f", [pinLocation distanceFromLocation: userLocation] / 1609.34);
-    DLog(@"Selected a view, height of view: %f, width of view: %f", view.frame.size.height, view.frame.size.width);
+    CLLocation *tmpPinLocation = [[CLLocation alloc] initWithLatitude: view.annotation.coordinate.latitude longitude: view.annotation.coordinate.longitude];
+
+    CNButton *tmpGetDirectionsButton = [CNButton buttonWithType: UIButtonTypeCustom];
+    [tmpGetDirectionsButton setPassingLongitude: tmpPinLocation.coordinate.longitude];
+    [tmpGetDirectionsButton setPassingLatitude:  tmpPinLocation.coordinate.latitude];
+    [tmpGetDirectionsButton setFrame: CGRectMake(10, 150, 104, 40)];
+    [tmpGetDirectionsButton setBackgroundColor: [UIColor grayColor]];
+    [tmpGetDirectionsButton setTitle: @"Get directions?" forState: UIControlStateNormal];
+    [tmpGetDirectionsButton.titleLabel setFont: [UIFont fontWithName: @"Helvetica" size: 15.0]];
+    [tmpGetDirectionsButton addTarget: self action: @selector(passDirections:) forControlEvents: UIControlEventTouchUpInside];
     
+    [self.view addSubview: tmpGetDirectionsButton];
+    _getDirectionsButton = tmpGetDirectionsButton;
 }
 
 - (void)didReceiveMemoryWarning

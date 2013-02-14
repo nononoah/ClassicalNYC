@@ -9,7 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface CNButton : UIButton
-
+//used to map from tablecell in CNTableViewController
 @property int foundInRow;
+
+//used to pass pin location to get directions in CNNearby
+@property double passingLatitude;
+@property double passingLongitude;
 
 @end
