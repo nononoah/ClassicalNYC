@@ -10,13 +10,11 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface CNAnnotation : NSObject <MKAnnotation>
+@interface CNAnnotation : NSObject <MKAnnotation, MKOverlay>
 
 - (id) initWithCoordinate: (CLLocationCoordinate2D) inCoordinate andTitle: (NSString *) inTitle andSubtitle: (NSString *) inSubtitle;
-- (id) initWithCoordinate: (CLLocationCoordinate2D) inCoordinate andBoundingMapRect: (MKMapRect) inBoundingMapRect;
 
-@property (nonatomic, assign) MKMapRect bounding;
-@property (nonatomic, assign) CLLocationCoordinate2D coordinate;
+@property (nonatomic) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 

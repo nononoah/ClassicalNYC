@@ -11,11 +11,13 @@
 #import "CNVenue.h"
 #import "CNAnnotation.h"
 #import "CNButton.h"
+#import "CNOverlayView.h"
 
 @interface CNNearbyController ()
 {
     UIButton *_previousSender;
     CNButton *_getDirectionsButton;
+    MKCircle *_previousCircleOverlay;
 }
 @end
 
@@ -85,24 +87,32 @@
         [_getDirectionsButton removeFromSuperview];
     }
     
-    //determine the proximity range from the first two characters of the sender
-#warning This works, but 10 gives it obvious fits
-    int tmpProximityRange = (int)[sender.currentTitle characterAtIndex: 0] + (int)[sender.currentTitle characterAtIndex: 1];
+    //determine the proximity range from the first word of sender title
+    NSArray *tmpStringArray = [sender.currentTitle componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+    NSString *tmpProximityString = [NSString stringWithString: [tmpStringArray objectAtIndex: 0]];
+    int tmpProximityRange = [tmpProximityString isEqualToString:@"1"] ? 1:
+                            [tmpProximityString isEqualToString:@"5"] ? 5:
+                            [tmpProximityString isEqualToString:@"10"]? 10:
+                            -1; //this will cause a cascade of issues that would be easily recognizable
+    
     //DLog(@"Proximity range: %i", tmpProximityRange);
     CLLocation *tmpUserLocation = [[CLLocation alloc] initWithLatitude: self.mapView.userLocation.coordinate.latitude longitude: self.mapView.userLocation.coordinate.longitude];
+    
+    //add an overlay that indicate proximity range
+    MKCircle *tmpCircle = [[MKCircle circleWithCenterCoordinate: tmpUserLocation.coordinate radius: tmpProximityRange * 1609.34] retain];
+    [self.mapView addOverlay: tmpCircle];
     
     //test each venue for its proximity to current location
     for (CNVenue *tmpVenue in VENUELIST)
     {
         CLLocation *tmpVenueLocation = [[CLLocation alloc] initWithLatitude: tmpVenue.latitude.doubleValue longitude: tmpVenue.longitude.doubleValue];
         //add 85 to make the int to ASCII conversion
-        float tmpDistanceFromCurrentLocation = ([tmpVenueLocation distanceFromLocation: tmpUserLocation] / 1609.34) + 80;
+        float tmpDistanceFromCurrentLocation = ([tmpVenueLocation distanceFromLocation: tmpUserLocation] / 1609.34);
         
         //if user is close enough to a venue, drop the venue's pin
         if (tmpDistanceFromCurrentLocation <= tmpProximityRange)
         {
-            CLLocationCoordinate2D tmpVenueCoordinate = {tmpVenue.latitude.doubleValue, tmpVenue.longitude.doubleValue};
-            CNAnnotation *tmpPin = [[CNAnnotation alloc] initWithCoordinate: tmpVenueCoordinate
+            CNAnnotation *tmpPin = [[CNAnnotation alloc] initWithCoordinate: tmpVenueLocation.coordinate
                                                                    andTitle: tmpVenue.venueName
                                                                 andSubtitle: tmpVenue.venueStreetAddress];
             [self.annotationArray addObject: tmpPin];
@@ -117,10 +127,10 @@
 - (void) passDirections: (CNButton *) inSender
 {
     CLLocation *tmpPinLocation = [[CLLocation alloc] initWithLatitude: inSender.passingLatitude longitude: inSender.passingLongitude];
-    [self openMapsWithDirectionsTo: tmpPinLocation.coordinate];
+    [self openMapsWithDirectionsTo: tmpPinLocation.coordinate withDestinationName: inSender.passingName];
 }
 
-- (void) openMapsWithDirectionsTo: (CLLocationCoordinate2D) inLocation
+- (void) openMapsWithDirectionsTo: (CLLocationCoordinate2D) inDestination withDestinationName: (NSString *) inName
 {
     //MKMapItems are used to encapsulate map data which is used to launch the apple maps app (Map routing has to be turned on in plist)
     
@@ -129,8 +139,8 @@
     if (tmpClass && [tmpClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
     {
         MKMapItem *tmpCurrentLocation = [MKMapItem mapItemForCurrentLocation];
-        MKMapItem *tmpToLocation = [[MKMapItem alloc] initWithPlacemark:[[[MKPlacemark alloc] initWithCoordinate: inLocation addressDictionary:nil] autorelease]];
-        tmpToLocation.name = @"Destination";
+        MKMapItem *tmpToLocation = [[MKMapItem alloc] initWithPlacemark:[[[MKPlacemark alloc] initWithCoordinate: inDestination addressDictionary:nil] autorelease]];
+        tmpToLocation.name = inName;
         [MKMapItem openMapsWithItems:[NSArray arrayWithObjects: tmpCurrentLocation, tmpToLocation, nil]
                        launchOptions:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeDriving, [NSNumber numberWithBool:YES], nil]
                                                                  forKeys:[NSArray arrayWithObjects:MKLaunchOptionsDirectionsModeKey, MKLaunchOptionsShowsTrafficKey, nil]]];
@@ -141,7 +151,7 @@
     {
         NSMutableString *mapURL = [NSMutableString stringWithString:@"http://maps.google.com/maps?"];
         [mapURL appendFormat:@"saddr=%f, %f", self.mapView.userLocation.coordinate.latitude, self.mapView.userLocation.coordinate.longitude];
-        [mapURL appendFormat:@"&daddr=%f,%f", inLocation.latitude, inLocation.longitude];
+        [mapURL appendFormat:@"&daddr=%f,%f", inDestination.latitude, inDestination.longitude];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[mapURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
     }
 
@@ -168,6 +178,20 @@
     return pinView;
 }
 
+//change overlay appearance
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)inOverlay
+{
+    if (_previousCircleOverlay)
+        [self.mapView removeOverlay: _previousCircleOverlay];
+    
+    DLog(@"Added overlay");
+    MKCircleView *tmpCircleView = [[[MKCircleView alloc] initWithCircle:(MKCircle *) inOverlay] autorelease];
+    tmpCircleView.fillColor = [UIColor blueColor];
+    tmpCircleView.alpha = .3;
+    _previousCircleOverlay = inOverlay;
+    return tmpCircleView;
+}
+
 //delegate learns a view has been selected
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
 {
@@ -176,6 +200,7 @@
     CNButton *tmpGetDirectionsButton = [CNButton buttonWithType: UIButtonTypeCustom];
     [tmpGetDirectionsButton setPassingLongitude: tmpPinLocation.coordinate.longitude];
     [tmpGetDirectionsButton setPassingLatitude:  tmpPinLocation.coordinate.latitude];
+    [tmpGetDirectionsButton setPassingName: view.annotation.title];
     [tmpGetDirectionsButton setFrame: CGRectMake(10, 150, 104, 40)];
     [tmpGetDirectionsButton setBackgroundColor: [UIColor grayColor]];
     [tmpGetDirectionsButton setTitle: @"Get directions?" forState: UIControlStateNormal];

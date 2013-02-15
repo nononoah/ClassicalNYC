@@ -10,6 +10,8 @@
 		1D0E2D9816CC0E0B000CCF58 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */; };
 		1D0F603116C97BC400FE9841 /* CNAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F603016C97BC400FE9841 /* CNAnnotation.m */; };
 		1D30FF4C16CC2133009C5874 /* CNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D30FF4B16CC2133009C5874 /* CNButton.m */; };
+		1D3600C916CE9360002CCBB4 /* CNOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3600C816CE9360002CCBB4 /* CNOverlayView.m */; };
+		1D3600CB16CE95D1002CCBB4 /* overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D3600CA16CE95D1002CCBB4 /* overlay.png */; };
 		1DD685B516CA948000E45852 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B416CA948000E45852 /* AVFoundation.framework */; };
 		1DD685B716CA948A00E45852 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B616CA948A00E45852 /* CoreData.framework */; };
 		1DD685B916CA949300E45852 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B816CA949300E45852 /* CoreText.framework */; };
@@ -74,6 +76,9 @@
 		1D0F603016C97BC400FE9841 /* CNAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAnnotation.m; sourceTree = "<group>"; };
 		1D30FF4A16CC2133009C5874 /* CNButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNButton.h; path = Extensions/CNButton.h; sourceTree = "<group>"; };
 		1D30FF4B16CC2133009C5874 /* CNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNButton.m; path = Extensions/CNButton.m; sourceTree = "<group>"; };
+		1D3600C716CE9360002CCBB4 /* CNOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNOverlayView.h; path = Views/CNOverlayView.h; sourceTree = "<group>"; };
+		1D3600C816CE9360002CCBB4 /* CNOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNOverlayView.m; path = Views/CNOverlayView.m; sourceTree = "<group>"; };
+		1D3600CA16CE95D1002CCBB4 /* overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay.png; sourceTree = "<group>"; };
 		1DD685B416CA948000E45852 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1DD685B616CA948A00E45852 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1DD685B816CA949300E45852 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -184,6 +189,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D3600C616CE9313002CCBB4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1D3600C716CE9360002CCBB4 /* CNOverlayView.h */,
+				1D3600C816CE9360002CCBB4 /* CNOverlayView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		1DD685CA16CA94ED00E45852 /* Google Maps Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,6 +281,8 @@
 			children = (
 				1DE1244716C93FCA00463022 /* CNAppDelegate.h */,
 				1DE1244816C93FCA00463022 /* CNAppDelegate.m */,
+				1D3600CA16CE95D1002CCBB4 /* overlay.png */,
+				1D3600C616CE9313002CCBB4 /* Views */,
 				1DE1246D16C9400000463022 /* ViewControllers */,
 				1DE1247216C940E500463022 /* Tabs */,
 				1DE1243F16C93FCA00463022 /* Supporting Files */,
@@ -456,6 +472,7 @@
 				1DD685D316CA98C900E45852 /* GoogleMaps.bundle in Resources */,
 				1DE1244D16C93FCA00463022 /* Default@2x.png in Resources */,
 				1DE1244F16C93FCA00463022 /* Default-568h@2x.png in Resources */,
+				1D3600CB16CE95D1002CCBB4 /* overlay.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +528,7 @@
 				1DD685CD16CA95EA00E45852 /* CNGoogleMapViewController.m in Sources */,
 				1DF01BF616CBE75D007FFADB /* CNNearbyController.m in Sources */,
 				1D30FF4C16CC2133009C5874 /* CNButton.m in Sources */,
+				1D3600C916CE9360002CCBB4 /* CNOverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

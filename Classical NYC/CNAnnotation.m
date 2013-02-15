@@ -22,16 +22,6 @@
     return self;
 }
 
-- (id) initWithCoordinate:( CLLocationCoordinate2D)inCoordinate andBoundingMapRect: (MKMapRect) inBoundingMapRect
-{
-    self = [super init];
-    if (self) {
-        _coordinate = inCoordinate;
-        _bounding = inBoundingMapRect;
-    }
-    return self;
-}
-
 
 - (void) dealloc
 {
