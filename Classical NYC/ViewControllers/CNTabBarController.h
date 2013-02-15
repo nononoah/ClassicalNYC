@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CNTabBarController : UITabBarController
+@interface CNTabBarController : UITabBarController <UIAlertViewDelegate>
 
 @end

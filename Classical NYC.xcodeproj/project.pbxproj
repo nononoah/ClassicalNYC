@@ -10,8 +10,10 @@
 		1D0E2D9816CC0E0B000CCF58 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D0E2D9716CC0E0B000CCF58 /* MobileCoreServices.framework */; };
 		1D0F603116C97BC400FE9841 /* CNAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D0F603016C97BC400FE9841 /* CNAnnotation.m */; };
 		1D30FF4C16CC2133009C5874 /* CNButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D30FF4B16CC2133009C5874 /* CNButton.m */; };
-		1D3600C916CE9360002CCBB4 /* CNOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3600C816CE9360002CCBB4 /* CNOverlayView.m */; };
-		1D3600CB16CE95D1002CCBB4 /* overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 1D3600CA16CE95D1002CCBB4 /* overlay.png */; };
+		1D3600CE16CEA66F002CCBB4 /* CNAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3600CD16CEA66F002CCBB4 /* CNAnnotationView.m */; };
+		1DC250E916CEB47500F12763 /* venueIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC250E816CEB47500F12763 /* venueIcon.png */; };
+		1DC250ED16CED02D00F12763 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC250EC16CED02D00F12763 /* Default.png */; };
+		1DC250EF16CED09A00F12763 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DC250EE16CED09A00F12763 /* Icon@2x.png */; };
 		1DD685B516CA948000E45852 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B416CA948000E45852 /* AVFoundation.framework */; };
 		1DD685B716CA948A00E45852 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B616CA948A00E45852 /* CoreData.framework */; };
 		1DD685B916CA949300E45852 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DD685B816CA949300E45852 /* CoreText.framework */; };
@@ -32,7 +34,6 @@
 		1DE1244316C93FCA00463022 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1DE1244116C93FCA00463022 /* InfoPlist.strings */; };
 		1DE1244516C93FCA00463022 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1244416C93FCA00463022 /* main.m */; };
 		1DE1244916C93FCA00463022 /* CNAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DE1244816C93FCA00463022 /* CNAppDelegate.m */; };
-		1DE1244B16C93FCA00463022 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DE1244A16C93FCA00463022 /* Default.png */; };
 		1DE1244D16C93FCA00463022 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DE1244C16C93FCA00463022 /* Default@2x.png */; };
 		1DE1244F16C93FCA00463022 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1DE1244E16C93FCA00463022 /* Default-568h@2x.png */; };
 		1DE1245716C93FCA00463022 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DE1245616C93FCA00463022 /* SenTestingKit.framework */; };
@@ -76,9 +77,11 @@
 		1D0F603016C97BC400FE9841 /* CNAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNAnnotation.m; sourceTree = "<group>"; };
 		1D30FF4A16CC2133009C5874 /* CNButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNButton.h; path = Extensions/CNButton.h; sourceTree = "<group>"; };
 		1D30FF4B16CC2133009C5874 /* CNButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNButton.m; path = Extensions/CNButton.m; sourceTree = "<group>"; };
-		1D3600C716CE9360002CCBB4 /* CNOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNOverlayView.h; path = Views/CNOverlayView.h; sourceTree = "<group>"; };
-		1D3600C816CE9360002CCBB4 /* CNOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNOverlayView.m; path = Views/CNOverlayView.m; sourceTree = "<group>"; };
-		1D3600CA16CE95D1002CCBB4 /* overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlay.png; sourceTree = "<group>"; };
+		1D3600CC16CEA66F002CCBB4 /* CNAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CNAnnotationView.h; path = Views/CNAnnotationView.h; sourceTree = "<group>"; };
+		1D3600CD16CEA66F002CCBB4 /* CNAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CNAnnotationView.m; path = Views/CNAnnotationView.m; sourceTree = "<group>"; };
+		1DC250E816CEB47500F12763 /* venueIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = venueIcon.png; sourceTree = "<group>"; };
+		1DC250EC16CED02D00F12763 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		1DC250EE16CED09A00F12763 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		1DD685B416CA948000E45852 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		1DD685B616CA948A00E45852 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		1DD685B816CA949300E45852 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -104,7 +107,6 @@
 		1DE1244616C93FCA00463022 /* Classical NYC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Classical NYC-Prefix.pch"; sourceTree = "<group>"; };
 		1DE1244716C93FCA00463022 /* CNAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CNAppDelegate.h; sourceTree = "<group>"; };
 		1DE1244816C93FCA00463022 /* CNAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CNAppDelegate.m; sourceTree = "<group>"; };
-		1DE1244A16C93FCA00463022 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		1DE1244C16C93FCA00463022 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		1DE1244E16C93FCA00463022 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		1DE1245516C93FCA00463022 /* Classical NYCTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Classical NYCTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,8 +194,8 @@
 		1D3600C616CE9313002CCBB4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				1D3600C716CE9360002CCBB4 /* CNOverlayView.h */,
-				1D3600C816CE9360002CCBB4 /* CNOverlayView.m */,
+				1D3600CC16CEA66F002CCBB4 /* CNAnnotationView.h */,
+				1D3600CD16CEA66F002CCBB4 /* CNAnnotationView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -281,7 +283,7 @@
 			children = (
 				1DE1244716C93FCA00463022 /* CNAppDelegate.h */,
 				1DE1244816C93FCA00463022 /* CNAppDelegate.m */,
-				1D3600CA16CE95D1002CCBB4 /* overlay.png */,
+				1DC250E816CEB47500F12763 /* venueIcon.png */,
 				1D3600C616CE9313002CCBB4 /* Views */,
 				1DE1246D16C9400000463022 /* ViewControllers */,
 				1DE1247216C940E500463022 /* Tabs */,
@@ -297,7 +299,8 @@
 				1DE1244116C93FCA00463022 /* InfoPlist.strings */,
 				1DE1244416C93FCA00463022 /* main.m */,
 				1DE1244616C93FCA00463022 /* Classical NYC-Prefix.pch */,
-				1DE1244A16C93FCA00463022 /* Default.png */,
+				1DC250EE16CED09A00F12763 /* Icon@2x.png */,
+				1DC250EC16CED02D00F12763 /* Default.png */,
 				1DE1244C16C93FCA00463022 /* Default@2x.png */,
 				1DE1244E16C93FCA00463022 /* Default-568h@2x.png */,
 			);
@@ -468,11 +471,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE1244316C93FCA00463022 /* InfoPlist.strings in Resources */,
-				1DE1244B16C93FCA00463022 /* Default.png in Resources */,
 				1DD685D316CA98C900E45852 /* GoogleMaps.bundle in Resources */,
 				1DE1244D16C93FCA00463022 /* Default@2x.png in Resources */,
 				1DE1244F16C93FCA00463022 /* Default-568h@2x.png in Resources */,
-				1D3600CB16CE95D1002CCBB4 /* overlay.png in Resources */,
+				1DC250E916CEB47500F12763 /* venueIcon.png in Resources */,
+				1DC250ED16CED02D00F12763 /* Default.png in Resources */,
+				1DC250EF16CED09A00F12763 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +532,7 @@
 				1DD685CD16CA95EA00E45852 /* CNGoogleMapViewController.m in Sources */,
 				1DF01BF616CBE75D007FFADB /* CNNearbyController.m in Sources */,
 				1D30FF4C16CC2133009C5874 /* CNButton.m in Sources */,
-				1D3600C916CE9360002CCBB4 /* CNOverlayView.m in Sources */,
+				1D3600CE16CEA66F002CCBB4 /* CNAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 #import "CNVenue.h"
 #import "CNAnnotation.h"
 #import "CNButton.h"
-#import "CNOverlayView.h"
+
 
 @interface CNNearbyController ()
 {
@@ -42,7 +42,7 @@
     
     // {} shortcut for defining structs
     CLLocationCoordinate2D tmpCenter = {40.7142, -74.006}; //latitude, longitude
-    MKCoordinateSpan tmpSpan = {.2, .2}; //degrees of lat and long span includes
+    MKCoordinateSpan tmpSpan = {.3, .3}; //degrees of lat and long span includes
     MKCoordinateRegion tmpRegion = {tmpCenter, tmpSpan}; //region sets default location and zoom for map when it opens
     self.mapView.region = tmpRegion;
     self.mapView.showsUserLocation = YES;
@@ -95,19 +95,26 @@
                             [tmpProximityString isEqualToString:@"10"]? 10:
                             -1; //this will cause a cascade of issues that would be easily recognizable
     
+    tmpProximityRange *= 1609.34; //convert miles to meters
+    
     //DLog(@"Proximity range: %i", tmpProximityRange);
     CLLocation *tmpUserLocation = [[CLLocation alloc] initWithLatitude: self.mapView.userLocation.coordinate.latitude longitude: self.mapView.userLocation.coordinate.longitude];
     
     //add an overlay that indicate proximity range
-    MKCircle *tmpCircle = [[MKCircle circleWithCenterCoordinate: tmpUserLocation.coordinate radius: tmpProximityRange * 1609.34] retain];
+    MKCircle *tmpCircle = [[MKCircle circleWithCenterCoordinate: tmpUserLocation.coordinate radius: tmpProximityRange] retain];
     [self.mapView addOverlay: tmpCircle];
+    
+    //change zoom to better fit the proximity
+    //MKCoordinateSpan tmpSpan = {.2 * tmpProximityRange, .2 * tmpProximityRange};
+    //MKCoordinateRegion tmpRegion = {self.mapView.region.center, tmpSpan};
+    //[self.mapView setRegion: tmpRegion animated:YES];
+
     
     //test each venue for its proximity to current location
     for (CNVenue *tmpVenue in VENUELIST)
     {
         CLLocation *tmpVenueLocation = [[CLLocation alloc] initWithLatitude: tmpVenue.latitude.doubleValue longitude: tmpVenue.longitude.doubleValue];
-        //add 85 to make the int to ASCII conversion
-        float tmpDistanceFromCurrentLocation = ([tmpVenueLocation distanceFromLocation: tmpUserLocation] / 1609.34);
+        float tmpDistanceFromCurrentLocation = [tmpVenueLocation distanceFromLocation: tmpUserLocation];
         
         //if user is close enough to a venue, drop the venue's pin
         if (tmpDistanceFromCurrentLocation <= tmpProximityRange)
@@ -133,7 +140,6 @@
 - (void) openMapsWithDirectionsTo: (CLLocationCoordinate2D) inDestination withDestinationName: (NSString *) inName
 {
     //MKMapItems are used to encapsulate map data which is used to launch the apple maps app (Map routing has to be turned on in plist)
-    
     //check to see if ios 6 is running, previous versions do not support MKMapItem
     Class tmpClass = [MKMapItem class];
     if (tmpClass && [tmpClass respondsToSelector:@selector(openMapsWithItems:launchOptions:)])
@@ -159,6 +165,11 @@
 
 
 #pragma mark MKMapView delegate methods
+- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+{
+
+}
+
 //gain access to customization of MKAnnotationView through this method
 -(MKAnnotationView *)mapView:(MKMapView *) inMapView viewForAnnotation: (id <MKAnnotation>) inAnnotation
 {
@@ -167,13 +178,15 @@
         return nil;
     
     static NSString *defaultPinID = @"default pin";
-    MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc] initWithAnnotation: inAnnotation reuseIdentifier: defaultPinID];
+    MKAnnotationView *pinView = [[MKAnnotationView alloc] initWithAnnotation: inAnnotation reuseIdentifier: defaultPinID];
     //pinView.draggable = YES;
     //pinView.image
-    
-    pinView.pinColor = MKPinAnnotationColorRed;
+    UIImage *tmpImage = [UIImage imageNamed: @"venueIcon.png"];
+    pinView.image = tmpImage;
     pinView.canShowCallout = YES;
-    pinView.animatesDrop = YES;
+    
+    [pinView setFrame: CGRectMake(0, 0, 15, 15)];
+    //pinView.animatesDrop = YES;
     
     return pinView;
 }
@@ -184,7 +197,6 @@
     if (_previousCircleOverlay)
         [self.mapView removeOverlay: _previousCircleOverlay];
     
-    DLog(@"Added overlay");
     MKCircleView *tmpCircleView = [[[MKCircleView alloc] initWithCircle:(MKCircle *) inOverlay] autorelease];
     tmpCircleView.fillColor = [UIColor blueColor];
     tmpCircleView.alpha = .3;

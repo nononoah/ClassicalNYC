@@ -1,5 +1,5 @@
 //
-//  CNOverlayView.h
+//  CNAnnotationView.h
 //  Classical NYC
 //
 //  Created by Noah Blake on 2/15/13.
@@ -8,6 +8,6 @@
 
 #import <MapKit/MapKit.h>
 
-@interface CNOverlayView : MKOverlayView
+@interface CNAnnotationView : MKAnnotationView
 
 @end

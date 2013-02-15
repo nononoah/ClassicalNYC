@@ -47,5 +47,10 @@
 	<array>
 		<string>MKDirectionsModePlane</string>
 	</array>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon</string>
+		<string></string>
+	</array>
 </dict>
 </plist>

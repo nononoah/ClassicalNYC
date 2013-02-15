@@ -31,7 +31,7 @@ static int _pinCount = 0;
 
     // {} shortcut for defining structs
     CLLocationCoordinate2D tmpCenter = {40.7142, -74.006}; //latitude, longitude
-    MKCoordinateSpan tmpSpan = {.2, .2}; //degrees of lat and long span includes
+    MKCoordinateSpan tmpSpan = {.3, .3}; //degrees of lat and long span includes
     MKCoordinateRegion tmpRegion = {tmpCenter, tmpSpan}; //region sets default location and zoom for map when it opens
     self.mapView.region = tmpRegion;
     self.mapView.showsUserLocation = YES;
